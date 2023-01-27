@@ -1,0 +1,24 @@
+
+.cabecalho{
+    border-bottom: #e5e5e5 2px solid;
+}
+ 
+.btn-primary{
+    background-color: #FB9400;
+    border: none;
+    margin: 2px;
+    padding: 10px;
+}
+
+.btn-primary:hover{
+    background-color: #d88006;
+}
+
+.navbar-brand{
+    width: 20%;
+}
+
+.navbar-brand img{
+    width: 100%;
+    height: 100%;
+}
