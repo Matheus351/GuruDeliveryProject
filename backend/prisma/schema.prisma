@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  email     String
+  password  String
+  empresas  Empresa[]
+  endereco  Endereco   @relation(fields: [endereco_id], references: [id])
+  carrinhos Carrinho[]
+
+  endereco_id String
+
+  @@map("users")
+}
+
+model Empresa {
+  id   String @default(uuid())
+  cnpj String @id @default(uuid())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@map("empresas")
+}
+
+model Produto {
+  id           String         @id @default(uuid())
+  name         String
+  price        String
+  description  String
+  image        String
+  categoria    Categoria      @relation(fields: [categoria_id], references: [id])
+  categoria_id String
+  items        ItemCarrinho[]
+
+  @@map("produtos")
+}
+
+model Categoria {
+  id       String    @id @default(uuid())
+  name     String
+  produtos Produto[]
+
+  @@map("categorias")
+}
+
+model Carrinho {
+  id      String         @id @default(uuid())
+  data    DateTime       @default(now())
+  items   ItemCarrinho[]
+  user    User           @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@map("carrinhos")
+}
+
+model ItemCarrinho {
+  id         String @id @default(uuid())
+  quantidade Int
+
+  carrinho    Carrinho @relation(fields: [carrinho_id], references: [id])
+  produto     Produto  @relation(fields: [produto_id], references: [id])
+  carrinho_id String
+  produto_id  String
+
+  @@map("itens")
+}
+
+model Endereco {
+  id     String @id @default(uuid())
+  cidade String
+  rua    String
+  bairro String
+  numero String 
+
+  users User[]
+
+  @@map("enderecos")
+}
