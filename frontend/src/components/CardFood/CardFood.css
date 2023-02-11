@@ -1,0 +1,13 @@
+.minus,
+.plus {
+    cursor: pointer;
+    color: rgba(255, 166, 0, 0.87);
+    padding: 2px;
+}
+
+.food-card:hover {
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+        0 24px 46px #000000;
+    scale: 1.005;
+    cursor: pointer;
+}

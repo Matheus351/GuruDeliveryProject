@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaPlus, FaMinus } from 'react-icons/fa'
-import styles from './CardFood.module.css'
+import  './CardFood.css'
 
 const CardFood = () => {
 
@@ -53,11 +53,11 @@ const CardFood = () => {
                                 <div  className="food-card_order-count">
                                     <div  className="input-group mb-3">
                                         <div  className="input-group-prepend">
-                                            <FaMinus onClick={()=>setAmount(amount-1)}  size={25} className={styles.minus} />
+                                            <FaMinus onClick={()=>setAmount(amount-1)}  size={25} className='minus' />
                                         </div>
                                         <input onChange={(e)=>handleAmount(e.target.value)} type="text"  className="form-control input-manulator" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value={amount}/>
                                         <div  className="input-group-append">
-                                            <FaPlus onClick={()=>setAmount(amount+1)} size={25} className={styles.plus}/>
+                                            <FaPlus onClick={()=>setAmount(amount+1)} size={25} className='plus'/>
                                         </div>
                                     </div>
                                 </div>

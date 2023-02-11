@@ -41,7 +41,7 @@ function Header() {
                                 </ul>
                             </li>
                         </ul> 
-                        <a className="btn btn-primary" href="#" role="button">Cadastrar</a>
+                        <a className="btn btn-primary" href="/register" role="button">Cadastrar</a>
                         <a className="btn btn-primary" href="#" role="button">Fazer Login</a>
                     </div>
                 </div>
