@@ -32,7 +32,7 @@ Create another terminal and enter the backend directory:
 Create an .env file in the current directory like:
 
 ```bash
-  DATABASE_URL = "postgresql://youtPostgresConfiguration"
+  DATABASE_URL = "postgresql://userName:password@localhost:port/databaseName?schema=schemaName"
 ```
 
 Start the server and create an initial migration:
