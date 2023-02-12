@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 import './index.css'
 import CardFood from '../../components/CardFood'
+import StoreContext from '../../components/Store/Context'
 
 const Home = () => {
+    const { setToken } = useContext(StoreContext);
 
 
     return (
@@ -18,6 +20,12 @@ const Home = () => {
                     <CardFood />
                     <CardFood />
 
+                </div>
+
+                <div className='logout'>
+                    <button type='button' onClick={() => setToken()}>
+                        Sair
+                    </button>
                 </div>
             </div>
         </section>
