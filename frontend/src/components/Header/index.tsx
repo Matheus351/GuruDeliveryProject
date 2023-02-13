@@ -29,7 +29,7 @@ function Header() {
                                     Pedidos
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="#">Histórico</a></li>
+                                    <li><a className="dropdown-item" href="/pedidos">Histórico</a></li>
                                     <li><a className="dropdown-item" href="#">Novo</a></li>
                                 </ul>
                             </li>

@@ -8,6 +8,7 @@ import RegisterAddress from './pages/RegisterAddress';
 import Message from './components/Message';
 import RegisterUser from './pages/RegisterUser';
 import Login from './pages/Login/Login'
+import Pedidos from './pages/Pedidos';
 
 import { useEffect } from 'react';
 import Bus from './Utils/Bus';
@@ -70,6 +71,7 @@ function App() {
             <Route path='/register' element={<RegisterAddress />} />
             <Route path='/register/user' element={ token? <Navigate to={'/'}/> :  <RegisterUser />} />
             <Route path='/login' element={!token ? <UserLogin /> : <Navigate to={'/'}  />} />
+            <Route path='/pedidos' element={<Pedidos/>} />
           </Routes>
 
         </BrowserRouter>
