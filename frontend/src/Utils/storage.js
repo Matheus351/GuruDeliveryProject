@@ -1,27 +1,27 @@
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
 
-const storage = {};
+// const storage = {};
 
-try {
-    if(!window.localStorage){
-        throw Error('no local storage');
-    }
+// try {
+//     if(!window.localStorage){
+//         throw Error('no local storage');
+//     }
 
-    storage.set = (key, value) => localStorage.setItem(key, JSON.stringify(value));
-    storage.set (key) => {
-        const item = localStorage.getItem(key);
-        try {
-            return JSON.parse(item);
-        }catch (e) {
-            return null;
-        }
-    };
-    storage.remove = key => localStorage.removeItem(key);
-} catch (e) {
-    storage.set = Cookie.set;
-    storage.get = Cookie.getJSON;
-    Storage.remove = Cookie.remove;
-}
+//     storage.set = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+//     storage.set (key) => {
+//         const item = localStorage.getItem(key);
+//         try {
+//             return JSON.parse(item);
+//         }catch (e) {
+//             return null;
+//         }
+//     };
+//     storage.remove = key => localStorage.removeItem(key);
+// } catch (e) {
+//     storage.set = Cookie.set;
+//     storage.get = Cookie.getJSON;
+//     Storage.remove = Cookie.remove;
+// }
 
 
-export default storage;
+// export default storage;

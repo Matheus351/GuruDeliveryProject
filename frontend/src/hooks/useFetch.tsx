@@ -1,19 +1,29 @@
 import {useEffect, useState} from 'react'
 
+export interface User{
+    name:string,
+    email:string,
+    password:string,
+    endereco_id:string,
+    token:string
+}
+
 const useFetch = (url:string) => {
+   
+  
 
-
-
-    const [data, setData] = useState({})
+    const [data, setData] = useState<User>()
     //configurar cabeçalhos
     const [config, setConfig] = useState({})
     //configurar método:post,get...
     const [method, setMethod] = useState('')
 
-    // const [callFetch, setCallFetch] = useState({})
+    const [loading, setLoading] = useState(null)
+
+     //const [callFetch, setCallFetch] = useState({})
 
 
-    const httpConfig = (data:Object,method:string) => {
+    const httpConfig =  (data:Object,method:string) => {
 
         if(method==="POST"){
             setConfig({
@@ -28,6 +38,12 @@ const useFetch = (url:string) => {
         }
     }
 
+
+    // useEffect(()=>{
+
+    //     setLoading(false)
+
+    // },[data])
 
     // useEffect(() => {
 
@@ -49,20 +65,26 @@ const useFetch = (url:string) => {
 
         const httpRequest =  async () => {
 
-            if(method=="POST"){
 
-                let fetchOptions = [url, config]
+                if(method=="POST"){
 
-               // console.log(fetchOptions)
-                const res = await fetch(fetchOptions[0] as URL, fetchOptions[1])//('http...', {...})
-                const json = await res.json()
+                    setLoading(true)
 
-               // setCallFetch(json)
-              setData(json)
-           
+                    let fetchOptions = [url, config]
     
-            }
-
+                   // console.log(fetchOptions)
+                    const res = await fetch(fetchOptions[0] as URL, fetchOptions[1])//('http...', {...})
+                    
+                    const json = await res.json()
+    
+                    //setCallFetch(json)
+                    setData(json)
+                    setLoading(false)
+                  
+        
+                }
+    
+         
         }
 
 
@@ -71,7 +93,7 @@ const useFetch = (url:string) => {
     },[config, method, url])
 
 
-  return {data, httpConfig}
+  return {data, httpConfig, loading}
 }
 
 export default useFetch

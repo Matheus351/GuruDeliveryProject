@@ -1,8 +1,12 @@
 import './index.css'
-
+import { useContext } from 'react'
+import UserContext from '../../context/AuthUserContext'
+import { BiLogOut } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 
 function Header() {
 
+    const user = useContext(UserContext)
 
     return (
 
@@ -40,9 +44,25 @@ function Header() {
                                     <li><a className="dropdown-item" href="#">Gerenciar</a></li> */}
                                 </ul>
                             </li>
-                        </ul> 
-                        <a className="btn btn-primary" href="/register" role="button">Cadastrar</a>
-                        <a className="btn btn-primary" href="#" role="button">Fazer Login</a>
+                        </ul>
+
+                        {!user.token &&
+                            <>
+                                <Link className='btn btn-primary'  to='/register'>Cadastrar</Link>
+                                <Link className='btn btn-primary' to='/login'>Fazer Login</Link>
+                                {/* <a className="btn btn-primary" href="/register" role="button">Cadastrar</a>
+                                <a className="btn btn-primary" href="/login" role="button">Fazer Login</a> */}
+                            </>
+
+                        }
+
+                        {user.token && 
+               
+                      <button style={{border:'none',backgroundColor:'#fff'}}  onClick={user.removeUserToken}>
+                        Sair <BiLogOut color='red' size={25} ></BiLogOut>
+                        </button>
+                        }
+
                     </div>
                 </div>
             </nav>

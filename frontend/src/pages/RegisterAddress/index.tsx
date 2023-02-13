@@ -16,7 +16,7 @@ const RegisterAddress = () => {
 
     useEffect(() => {
 
-        if (Object.keys(addressData).length > 0) {
+        if (addressData) {
             localStorage.setItem('address', JSON.stringify(addressData))
             navigate('/register/user')
             return

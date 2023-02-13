@@ -1,4 +1,6 @@
 import prismaClient from "../../prisma";
+import { hash } from "bcryptjs"
+
 
 interface UserRequest {
     name: string
@@ -11,11 +13,15 @@ class UserService {
 
     async createUser({ name, email, password, endereco_id}: UserRequest) {
 
+
+
+        const passwordHash = await hash(password, 8)
+
         const user = await prismaClient.user.create({
             data: {
                 name: name,
                 email: email,
-                password: password,
+                password: passwordHash,
                 endereco_id:endereco_id
             },
             select: {

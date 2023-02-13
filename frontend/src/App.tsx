@@ -1,7 +1,7 @@
 
 import './App.css';
 import Header from './components/Header';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Home from './pages/Home';
 import RegisterAddress from './pages/RegisterAddress';
@@ -14,30 +14,70 @@ import Bus from './Utils/Bus';
 import UserLogin from './components/User/Login/Login';
 
 
+import UserContext from './context/AuthUserContext';
+import useFetch from './hooks/useFetch';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+// import User from ''
+
+
+
 
 
 function App() {
 
-  useEffect(()=>{
-    window.flash = (message:string, type="success") => Bus.emit('flash', ({message, type}));
-  },[])
-  
+
+  const [token, setToken] = useState(null)
+  const [userName, setUserName] = useState(null)
+
+
+  const setUserToken = (userToken:string) => {
+    setToken(userToken)
+  }
+
+  const removeUserToken = () => {
+    setToken(null)
+    localStorage.removeItem('user')
+  }
+
+  useEffect(() => {
+    window.flash = (message: string, type: string ) => Bus.emit('flash', ({ message, type }));
+  }, [])
+
+  useEffect(() => {
+
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    if (user) {
+      setToken(user.token)
+      setUserName(user.name)
+    }
+
+  }, [])
 
 
   return (
-    <div className="App">
-     <Header/>
-     <Message/>
-     <BrowserRouter>
 
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/register' element={<RegisterAddress/>} />
-        <Route path='/register/user' element={<RegisterUser/>}/>
-      </Routes>
+    <UserContext.Provider value={{ token: token, name: userName, setUserToken ,removeUserToken }}>
 
-     </BrowserRouter>
-    </div>
+      <div className="App">
+       
+        <BrowserRouter>
+        <Header />
+        <Message />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/register' element={<RegisterAddress />} />
+            <Route path='/register/user' element={ token? <Navigate to={'/'}/> :  <RegisterUser />} />
+            <Route path='/login' element={!token ? <UserLogin /> : <Navigate to={'/'}  />} />
+          </Routes>
+
+        </BrowserRouter>
+      </div>
+
+    </UserContext.Provider>
+
+
   );
 }
 

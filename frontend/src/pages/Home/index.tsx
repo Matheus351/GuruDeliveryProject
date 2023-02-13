@@ -5,11 +5,12 @@ import CardFood from '../../components/CardFood'
 import StoreContext from '../../components/Store/Context'
 
 const Home = () => {
-    const { setToken } = useContext(StoreContext);
+
+   // const { setToken } = useContext(StoreContext);
 
 
     return (
-        <section className="main-content">
+        <section className="main-content pt-0">
             <div className="container">
                 <h1 className="text-center text-uppercase">Lanches</h1>
                 <br />
@@ -22,11 +23,11 @@ const Home = () => {
 
                 </div>
 
-                <div className='logout'>
+                {/* <div className='logout'>
                     <button type='button' onClick={() => setToken()}>
                         Sair
                     </button>
-                </div>
+                </div> */}
             </div>
         </section>
 

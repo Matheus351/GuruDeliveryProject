@@ -105,3 +105,10 @@
     text-decoration-line: underline;
     color: #5C73DB;
   }  
+
+  .logoImg{
+    height: 180px;
+    width: 280px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+  }

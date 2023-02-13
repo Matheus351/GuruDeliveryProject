@@ -2,14 +2,19 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { SyntheticEvent, ChangeEvent } from 'react'
 import useFetch from '../../hooks/useFetch'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import UserContext from '../../context/AuthUserContext'
 
 const RegisterUser = () => {
 
 
   const baseURL = 'http://localhost:3003/users'
 
+  const navigate = useNavigate()
 
-  const {httpConfig} = useFetch(baseURL)
+
+  const {data:userLogged, httpConfig, loading} = useFetch(baseURL)
 
   const [user, setUser] = useState({})
   
@@ -23,6 +28,18 @@ const RegisterUser = () => {
    setAdressId(JSON.parse(getAddress!).id)
     
   },[])
+
+
+  useEffect(()=>{
+   
+    console.log(userLogged)
+   if(userLogged===undefined) return
+
+   navigate('/login')
+
+   // userContext.setUserToken(userLogged.token)
+
+  },[userLogged])
 
 
   const handleUser = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +60,11 @@ const RegisterUser = () => {
     const data = Object.fromEntries(formData)
 
     try {
+      
       httpConfig(data,'POST')
 
       window.flash('Cadastro realizado com sucesso!', 'success')
+
 
     } catch (error) {
       window.flash('Erro ao salvar usuário!', 'error')
