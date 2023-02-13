@@ -20,6 +20,7 @@ import useFetch from './hooks/useFetch';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Comprar from './pages/Comprar';
+import Carrinho from './pages/Carrinho';
 // import User from ''
 
 
@@ -74,6 +75,7 @@ function App() {
             <Route path='/login' element={!token ? <UserLogin /> : <Navigate to={'/'}  />} />
             <Route path='/pedidos' element={<Pedidos/>} />
             <Route path='/comprar' element={<Comprar/>} />
+            <Route path='/carrinho' element={<Carrinho/>} />
           </Routes>
 
         </BrowserRouter>

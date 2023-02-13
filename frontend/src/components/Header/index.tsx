@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import UserContext from '../../context/AuthUserContext'
 import { BiLogOut } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
+import { BsCartDashFill } from 'react-icons/bs'
 
 function Header() {
 
@@ -48,7 +49,7 @@ function Header() {
 
                         {!user.token &&
                             <>
-                                <Link className='btn btn-primary'  to='/register'>Cadastrar</Link>
+                                <Link className='btn btn-primary' to='/register'>Cadastrar</Link>
                                 <Link className='btn btn-primary' to='/login'>Fazer Login</Link>
                                 {/* <a className="btn btn-primary" href="/register" role="button">Cadastrar</a>
                                 <a className="btn btn-primary" href="/login" role="button">Fazer Login</a> */}
@@ -56,11 +57,19 @@ function Header() {
 
                         }
 
-                        {user.token && 
-               
-                      <button style={{border:'none',backgroundColor:'#fff'}}  onClick={user.removeUserToken}>
-                        Sair <BiLogOut color='red' size={25} ></BiLogOut>
-                        </button>
+                        {user.token &&
+
+                            <>
+                                <Link to={'/carrinho'}>
+                                  Seu carrinho:<BsCartDashFill className='m-2'  size={25} color='orange'/>
+                                </Link>
+
+                                <button style={{ border: 'none', backgroundColor: '#fff' }} onClick={user.removeUserToken}>
+                                    Sair <BiLogOut color='red' size={25} ></BiLogOut>
+                                </button>
+                            </>
+
+
                         }
 
                     </div>

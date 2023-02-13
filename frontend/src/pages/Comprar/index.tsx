@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import "./index.css";
+import CardFood from '../../components/CardFood';
 
 function Comprar() {
     const [itens, setItens] = useState([]);
+
 
     const [total, setTotal] = useState(0);
 
@@ -24,35 +26,49 @@ function Comprar() {
     }, [itens]);
 
 
-  return (
-    <div className='compra'>
-        <h1 className='title'>Hamburgers</h1>
-        <table className='itens-table'>
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Preco</th>
-                    <th>Quantidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {itens.map((iten, index) => (
-                    <tr key={iten.nome} className="iten-row">
-                        <td className='iten-name'>{iten.nome}</td>
-                        <th className='iten-price'>{iten.preco}</th>
-                        <th className='iten-quantity'>{iten.quantidade}</th>
-                        <th className='iten-actions'>
-                            <button onClick={() => handleAddToCart} className="add-button">+</button>
-                            <button onClick={() => handleRemoveFromCart} className="remove-button">-</button>
-                        </th>
+    return (
+
+        <div className='compra'>
+            <h1 className='title'>Hamburgers</h1>
+            <table className='itens-table'>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Preco</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
-        <h2 className='total'>Total: {total}</h2>
-    </div>
-  );
+                </thead>
+                <tbody>
+                    <tr className='iten-row'>
+                        <td className='item-name'>
+                        <CardFood />
+                        </td>
+
+                    </tr>
+                    <tr className='iten-row'>
+                        <td className='item-name'>
+                        <CardFood />
+                        </td>
+
+                    </tr>
+
+                    {itens.map((iten, index) => (
+                        <tr key={iten.nome} className="iten-row">
+                            <td className='iten-name'>{iten.nome}</td>
+                            <th className='iten-price'>{iten.preco}</th>
+                            <th className='iten-quantity'>{iten.quantidade}</th>
+                            <th className='iten-actions'>
+                                <button onClick={() => handleAddToCart} className="add-button">+</button>
+                                <button onClick={() => handleRemoveFromCart} className="remove-button">-</button>
+                            </th>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <h2 className='total'>Total: {total}</h2>
+        </div>
+    );
 };
 
 export default Comprar
