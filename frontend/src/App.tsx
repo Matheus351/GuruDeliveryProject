@@ -19,6 +19,7 @@ import UserContext from './context/AuthUserContext';
 import useFetch from './hooks/useFetch';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Comprar from './pages/Comprar';
 // import User from ''
 
 
@@ -72,6 +73,7 @@ function App() {
             <Route path='/register/user' element={ token? <Navigate to={'/'}/> :  <RegisterUser />} />
             <Route path='/login' element={!token ? <UserLogin /> : <Navigate to={'/'}  />} />
             <Route path='/pedidos' element={<Pedidos/>} />
+            <Route path='/comprar' element={<Comprar/>} />
           </Routes>
 
         </BrowserRouter>
