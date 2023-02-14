@@ -5,7 +5,8 @@ import useFetch from '../../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import UserContext from '../../context/AuthUserContext'
-
+import { AuthContext } from '../../context/AuthContext'
+import { SignupProps } from '../../context/AuthContext'
 const RegisterUser = () => {
 
 
@@ -14,11 +15,18 @@ const RegisterUser = () => {
   const navigate = useNavigate()
 
 
-  const {data:userLogged, httpConfig, loading} = useFetch(baseURL)
+  // const {data:userLogged, httpConfig, loading} = useFetch(baseURL)
 
   const [user, setUser] = useState({})
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   
   const [addressId, setAdressId] = useState('')
+
+  const {signUp} = useContext(AuthContext)
 
 
   useEffect(()=>{
@@ -30,16 +38,33 @@ const RegisterUser = () => {
   },[])
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
    
-    console.log(userLogged)
-   if(userLogged===undefined) return
+  //  if(userLogged===undefined) return
 
-   navigate('/login')
+  //  navigate('/login')
 
-   // userContext.setUserToken(userLogged.token)
+  //  // userContext.setUserToken(userLogged.token)
 
-  },[userLogged])
+  // },[userLogged])
+
+
+  const handleSignUp = async (e:SyntheticEvent) => {
+
+    e.preventDefault()
+
+     let data = {
+        name,
+        password,
+        email,
+        endereco_id:addressId
+     }
+
+     await signUp(data)
+
+     alert('usuario salvo')
+
+  }
 
 
   const handleUser = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,42 +76,43 @@ const RegisterUser = () => {
   }
 
 
-  const handleSubmit =  (e: SyntheticEvent) => {
+  // const handleSubmit =  (e: SyntheticEvent) => {
 
-    e.preventDefault()
+  //   e.preventDefault()
 
-    const formData = new FormData(e.target as HTMLFormElement)
+  //   const formData = new FormData(e.target as HTMLFormElement)
 
-    const data = Object.fromEntries(formData)
+  //   const data = Object.fromEntries(formData)
 
-    try {
+  //   try {
       
-      httpConfig(data,'POST')
+     
+  //     httpConfig(data,'POST')
 
-      window.flash('Cadastro realizado com sucesso!', 'success')
+  //     window.flash('Cadastro realizado com sucesso!', 'success')
 
 
-    } catch (error) {
-      window.flash('Erro ao salvar usuário!', 'error')
-    }
+  //   } catch (error) {
+  //     window.flash('Erro ao salvar usuário!', 'error')
+  //   }
       
 
-  }
+  // }
 
   return (
-    <form onSubmit={handleSubmit} className="row g-3 p-5">
+    <form onSubmit={handleSignUp} className="row g-3 p-5">
       <h4 className='text-muted'>Cadastra-se abaixo para usar os nossos serviços</h4>
       <div className="col-12">
         <label htmlFor="inputAddress" className="form-label">Nome:</label>
-        <input onChange={(e) => handleUser(e)} name='name' type="text" className="form-control" id="inputAddress" placeholder="Seu nome" />
+        <input onChange={(e) => setName(e.target.value)} name='name' type="text" className="form-control" id="inputAddress" placeholder="Seu nome" />
       </div>
       <div className="col-12">
         <label htmlFor="inputAddress2" className="form-label">Email:</label>
-        <input onChange={(e) => handleUser(e)} name='email' type="email" className="form-control" id="inputAddress2" placeholder="Seu email" />
+        <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="form-control" id="inputAddress2" placeholder="Seu email" />
       </div>
       <div className="col-md-6">
         <label htmlFor="inputCity" className="form-label">Senha:</label>
-        <input onChange={(e) => handleUser(e)} name='password' type="password" className="form-control" id="inputCity" />
+        <input onChange={(e) => setPassword(e.target.value)} name='password' type="password" className="form-control" id="inputCity" />
       </div>
 
         <input name="endereco_id" defaultValue={addressId} type="text" hidden />

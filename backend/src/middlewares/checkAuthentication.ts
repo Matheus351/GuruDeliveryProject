@@ -15,6 +15,7 @@ export function checkAuthentication(req:Request, resp:Response, next:NextFunctio
 
     const [, token] = authToken.split(" ")
 
+
     try{
       // check if token and jwt key are same
       const {sub} = verify(

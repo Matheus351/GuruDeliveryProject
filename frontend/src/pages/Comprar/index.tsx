@@ -42,13 +42,13 @@ function Comprar() {
                 <tbody>
                     <tr className='iten-row'>
                         <td className='item-name'>
-                        <CardFood />
+                        {/* <CardFood /> */}
                         </td>
 
                     </tr>
                     <tr className='iten-row'>
                         <td className='item-name'>
-                        <CardFood />
+                        {/* <CardFood /> */}
                         </td>
 
                     </tr>

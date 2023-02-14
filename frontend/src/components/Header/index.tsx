@@ -4,10 +4,16 @@ import UserContext from '../../context/AuthUserContext'
 import { BiLogOut } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { BsCartDashFill } from 'react-icons/bs'
+import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
 
-    const user = useContext(UserContext)
+    const userr = useContext(UserContext)
+    const navigate = useNavigate()
+   
+    const {user, isAuthenticated, signOut } = useContext(AuthContext)
+
 
     return (
 
@@ -30,8 +36,19 @@ function Header() {
                                     Pedidos
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="/pedidos">Histórico</a></li>
-                                    <li><a className="dropdown-item" href="/comprar">Novo</a></li>
+                                    <Link className='dropdown-item' to={'/pedidos'}>Histórico</Link>
+                                    <Link className='dropdown-item' to={'/comprar'}>Novo</Link>
+                                </ul>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Produtos e Categorias
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <Link className='dropdown-item' to={'/produto/register'}>Cadastrar Produto</Link>
+                                    <Link className='dropdown-item' to={'/categoria/register'}>Cadastrar Categoria</Link>
+                                    {/* <Link className='dropdown-item' to={'/produtos'}>Ver todos</Link> */}
+                                  
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
@@ -41,30 +58,30 @@ function Header() {
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a className="dropdown-item" href="#">Cadastrar</a></li>
                                     <li><a className="dropdown-item" href="#">Ver todos</a></li>
-                                    {/* <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Gerenciar</a></li> */}
                                 </ul>
                             </li>
                         </ul>
 
-                        {!user.token &&
+                        {/* {user &&  <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">{user.name}</a>
+                            </li> } */}
+
+                        {!isAuthenticated &&
                             <>
                                 <Link className='btn btn-primary' to='/register'>Cadastrar</Link>
                                 <Link className='btn btn-primary' to='/login'>Fazer Login</Link>
-                                {/* <a className="btn btn-primary" href="/register" role="button">Cadastrar</a>
-                                <a className="btn btn-primary" href="/login" role="button">Fazer Login</a> */}
                             </>
 
                         }
 
-                        {user.token &&
+                        {isAuthenticated &&
 
                             <>
                                 <Link to={'/carrinho'}>
-                                  Seu carrinho:<BsCartDashFill className='m-2'  size={25} color='orange'/>
+                                    Seu carrinho:<BsCartDashFill className='m-2' size={25} color='orange' />
                                 </Link>
 
-                                <button style={{ border: 'none', backgroundColor: '#fff' }} onClick={user.removeUserToken}>
+                                <button style={{ border: '1px solid grey', backgroundColor: '#fff' }} onClick={()=>signOut()}>
                                     Sair <BiLogOut color='red' size={25} ></BiLogOut>
                                 </button>
                             </>

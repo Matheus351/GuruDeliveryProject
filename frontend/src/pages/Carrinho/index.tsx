@@ -1,5 +1,9 @@
 import React from 'react'
 
+
+
+
+
 const Carrinho = () => {
   return (
     <section className="h-100 h-custom" style={{ backgroundColor: '#d2c9ff;' }}>
@@ -73,7 +77,7 @@ const Carrinho = () => {
 
                                     <div className="d-flex justify-content-between mb-5">
                                         <h5 className="text-uppercase">Total:</h5>
-                                        <h5>€ 137.00</h5>
+                                        <h5>R$ 137.00</h5>
                                     </div>
 
                                     <button type="button" className="btn btn-dark btn-block btn-lg"

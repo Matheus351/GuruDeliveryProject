@@ -1,36 +1,71 @@
-import React, { useState, useContext, SyntheticEvent, ChangeEvent, useEffect } from "react";
+import React, { FormEvent, useState, useContext, SyntheticEvent, ChangeEvent, useEffect } from "react";
 // import { useHistory } from 'react-router-dom'
 import StoreContext from "../../Store/Context";
 import logoImg from "../../../../public/logo.png"
 import { Link } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import UserContext from "../../../context/AuthUserContext";
-
+import { AuthContext } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 import './Login.css';
 
 const UserLogin = () => {
 
     const userContext = useContext(UserContext)
-   
+
+    const { signIn } = useContext(AuthContext)
+    
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+
+
+    async function handleLogin(e: FormEvent) {
+
+        e.preventDefault()
+
+        if(email===''||password===''){
+            window.flash('Erro ao logar usuário!', 'error')
+            return
+        }
+
+        setLoading(true)
+
+        const userData = {
+            email:email,
+            password:password
+        }
+
+        await signIn(userData)
+
+        setLoading(false)
+
+        navigate('/')
+
+    }
+
+
 
     const baseURL = 'http://localhost:3003/login'
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
 
     const [user, setUser] = useState({})
-    const {data:userLogged, httpConfig} = useFetch(baseURL)
+    const { data: userLogged, httpConfig } = useFetch(baseURL)
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        if(userLogged){
+        if (userLogged) {
             localStorage.setItem('user', JSON.stringify(userLogged))
             userContext.setUserToken(userLogged.token)
         }
 
-       
-    },[userLogged])
+
+    }, [userLogged])
 
 
 
@@ -50,16 +85,23 @@ const UserLogin = () => {
 
         const data = Object.fromEntries(formData)
 
-        
+
         try {
 
             httpConfig(data, 'POST')
-            
-            
-               window.flash('Login realizado!', 'sucess')
-            
 
-           
+            // const userData = {
+            //     email:user.email,
+            //     password:user.password
+            // }
+
+            // await signIn(user)
+
+
+            window.flash('Login realizado!', 'sucess')
+
+
+
         } catch (error) {
             window.flash('Erro ao logar usuário!', 'error')
         }
@@ -74,7 +116,7 @@ const UserLogin = () => {
                 <span>Use suas credenciais para realizar o login</span>
             </header>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLogin}>
 
                 <div className="inputContainer">
                     <label htmlFor="e-mail">E-mail</label>
@@ -82,8 +124,9 @@ const UserLogin = () => {
                         type="text"
                         name="email"
                         id="email"
+                        value={email}
                         placeholder="Digite seu e-mail"
-                        onChange={e => handleUser(e)}
+                        onChange={e => setEmail(e.target.value)}
                     />
                 </div>
 
@@ -93,8 +136,9 @@ const UserLogin = () => {
                         type="password"
                         name="password"
                         id="password"
+                        value={password}
                         placeholder="Digite sua senha"
-                        onChange={e => handleUser(e)}
+                        onChange={e => setPassword(e.target.value)}
                     />
                 </div>
 
