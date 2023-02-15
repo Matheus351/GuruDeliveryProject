@@ -27,9 +27,10 @@ model User {
 model Empresa {
   id   String @default(uuid())
   cnpj String @id @default(uuid())
+  nome String
 
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
+  user     User      @relation(fields: [user_id], references: [id])
+  user_id  String
 
   @@map("empresas")
 }
@@ -58,9 +59,11 @@ model Categoria {
 model Carrinho {
   id      String         @id @default(uuid())
   data    DateTime       @default(now())
-  items   ItemCarrinho[]
+  // items   ItemCarrinho[]
   user    User           @relation(fields: [user_id], references: [id])
+  items   ItemCarrinho[]
   user_id String
+  total   String
 
   @@map("carrinhos")
 }
@@ -82,7 +85,7 @@ model Endereco {
   cidade String
   rua    String
   bairro String
-  numero String 
+  numero String
 
   users User[]
 

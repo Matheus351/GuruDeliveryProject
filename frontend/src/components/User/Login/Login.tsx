@@ -90,14 +90,6 @@ const UserLogin = () => {
 
             httpConfig(data, 'POST')
 
-            // const userData = {
-            //     email:user.email,
-            //     password:user.password
-            // }
-
-            // await signIn(user)
-
-
             window.flash('Login realizado!', 'sucess')
 
 
@@ -149,8 +141,8 @@ const UserLogin = () => {
                 </button>
 
                 <div className="footer">
-                    <p>você não tem uma conta?</p>
-                    <Link to="/register">Crie a sua aqui</Link>
+                    <p>você não tem uma conta?<Link to="/register">Crie a sua aqui</Link></p>
+                    
                 </div>
             </form>
         </div>

@@ -16,7 +16,7 @@
     background: lightcoral;
     }
     .alert-success {
-    background: lightgreen;
+    background: rgba(84, 207, 84, 0.616);
     }
     .close {
     color: white;

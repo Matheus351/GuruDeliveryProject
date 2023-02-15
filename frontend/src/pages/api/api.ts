@@ -3,7 +3,6 @@ import { parseCookies } from "nookies";
 import { signOut } from "../../context/AuthContext";
 
 
-
 export function setupAPIClient(ctx = undefined){
 
     let cookies = parseCookies(ctx)
@@ -11,7 +10,7 @@ export function setupAPIClient(ctx = undefined){
     const api = axios.create({
         baseURL:'http://localhost:3003',
         headers:{
-            Authorization:`Bearer ${cookies['@app.token']}`
+            Authorization:`Bearer ${cookies['@app.token']}`,
         }
     })
 

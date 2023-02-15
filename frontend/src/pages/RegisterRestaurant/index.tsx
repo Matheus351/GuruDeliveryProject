@@ -1,28 +1,66 @@
-import React from 'react'
+
+
+import { SyntheticEvent, useState, useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+import { setupAPIClient } from '../api/api'
+
+
+export const Restaurante = () => {
+
+  const { user } = useContext(AuthContext)
+
+
+  const [nome, setNome] = useState('')
+  const [cnpj, setCnpj] = useState('')
 
 
 
-<form>
+  const handleSubmit = async (e: SyntheticEvent) => {
 
-  <div className="form-outline mb-4">
-    <input type="password" id="form1Example2" className="form-control" />
-    <label className="form-label" htmlFor="form1Example2">Nome do Restaurante</label>
-  </div>
+    e.preventDefault()
 
-  <div className="form-outline mb-4">
-    <input type="email" id="form1Example1" className="form-control" />
-    <label className="form-label" htmlFor="form1Example1">CNPJ</label>
-  </div>
+    const apiClient = setupAPIClient()
 
-  <div className="row mb-4">
-    <div className="col d-flex justify-content-center">
-      <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-        <label className="form-check-label" htmlFor="form1Example3"> Remember me </label>
-      </div>
+    const data = {
+      user_id:user.id,
+      cnpj,
+      nome
+    }
+
+
+    await apiClient.post('/empresa',data)
+
+    window.flash('Cadastro realizado com sucesso!', 'success')
+
+    
+
+
+  }
+
+
+  return (
+    <div>
+
+      <form onSubmit={handleSubmit} className="row g-3 p-5">
+        <h4 className='text-muted'>Cadastre seu restaurante</h4>
+        <div className="col-12">
+          <label htmlFor="inputAddress" className="form-label">Nome:</label>
+          <input onChange={(e) => setNome(e.target.value)} name='nome' type="text" className="form-control" id="inputAddress" placeholder="" />
+        </div>
+        <div className="col-12">
+          <label htmlFor="inputAddress2" className="form-label">CNPJ:</label>
+          <input onChange={(e) => setCnpj(e.target.value)} name='cnpj' type="text" className="form-control" id="inputAddress2" placeholder="" />
+        </div>
+        <input value="" type="text" hidden />
+        <div className="col-12">
+          <button type="submit" className="btn btn-success">Cadastrar</button>
+        </div>
+      </form>
+
     </div>
+  )
+}
 
-  </div>
 
-  <button type="submit" className="btn btn-primary btn-block">Cadastrar</button>
-</form>
+
+

@@ -53,22 +53,6 @@ const RegisterProduct = () => {
 
 
 
-    // useEffect(() => {
-
-    //     if (productSaved === undefined) return
-
-
-    //     console.log(productSaved)
-
-    //     //navigate('/')
-
-    //     // userContext.setUserToken(userLogged.token)
-
-    // }, [productSaved])
-
-
-
-
     const handleProduct = (e: ChangeEvent<HTMLInputElement>) => {
 
         const { name, value } = e.target

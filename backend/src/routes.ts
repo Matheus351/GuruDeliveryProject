@@ -8,6 +8,11 @@ import { ListProductsController } from "./controllers/produto/ListProductsContro
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import {checkAuthentication} from "./middlewares/checkAuthentication"
 import { ListCategoryController } from "./controllers/category/ListCategoriesController";
+import { CarrinhoController } from "./controllers/carrinho/CarrinhoController";
+import { AddItemController } from "./controllers/carrinho/AddItemController";
+import { ListCarrinhoController } from "./controllers/carrinho/ListCarrinhoController";
+import { EmpresaController } from "./controllers/empresa/EmpresaController";
+import { ListEmpresaController } from "./controllers/empresa/ListEmpresaController";
 
 const router = Router()
 
@@ -28,5 +33,15 @@ router.get('/produtos/all', new ListProductsController().handleProducts )
 //categoria routes
 router.post('/categorias',checkAuthentication, new CategoryController().handleCategory)
 router.get('/categorias/all', checkAuthentication, new ListCategoryController().handle)
+
+//carrinho routes
+router.post('/carrinho',checkAuthentication, new CarrinhoController().handleCarrinho)
+router.post('/carrinho/add', checkAuthentication, new AddItemController().handleAddItem)
+router.get('/carrinho/all/:id', checkAuthentication, new ListCarrinhoController().handleListCarrinho )
+
+
+//empresa routes
+router.post('/empresa',checkAuthentication, new EmpresaController().handleEmpresa)
+router.get('/empresas/:id',checkAuthentication, new ListEmpresaController().handleListEmpresa)
 
 export {router}

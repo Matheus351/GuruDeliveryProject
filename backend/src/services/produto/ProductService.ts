@@ -5,7 +5,7 @@ interface ProductRequest {
     price: string
     description: string
     image: string
-    categoria_id:string
+    categoria_id:string,
 }
 
 class ProductService {

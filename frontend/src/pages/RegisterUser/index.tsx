@@ -10,18 +10,15 @@ import { SignupProps } from '../../context/AuthContext'
 const RegisterUser = () => {
 
 
-  const baseURL = 'http://localhost:3003/users'
+
 
   const navigate = useNavigate()
-
-
-  // const {data:userLogged, httpConfig, loading} = useFetch(baseURL)
-
-  const [user, setUser] = useState({})
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // const [endereco, setEndereco] = useState('')
+  // const [telefone, setTelefone] = useState('')
 
   
   const [addressId, setAdressId] = useState('')
@@ -38,66 +35,25 @@ const RegisterUser = () => {
   },[])
 
 
-  // useEffect(()=>{
-   
-  //  if(userLogged===undefined) return
-
-  //  navigate('/login')
-
-  //  // userContext.setUserToken(userLogged.token)
-
-  // },[userLogged])
-
-
   const handleSignUp = async (e:SyntheticEvent) => {
 
     e.preventDefault()
 
      let data = {
         name,
-        password,
         email,
+        password,
         endereco_id:addressId
      }
 
+
      await signUp(data)
 
-     alert('usuario salvo')
+     navigate('/login')
 
   }
 
 
-  const handleUser = (e: ChangeEvent<HTMLInputElement>) => {
-
-    const { name, value } = e.target
-
-      setUser({ ...user, [name]: value })
-
-  }
-
-
-  // const handleSubmit =  (e: SyntheticEvent) => {
-
-  //   e.preventDefault()
-
-  //   const formData = new FormData(e.target as HTMLFormElement)
-
-  //   const data = Object.fromEntries(formData)
-
-  //   try {
-      
-     
-  //     httpConfig(data,'POST')
-
-  //     window.flash('Cadastro realizado com sucesso!', 'success')
-
-
-  //   } catch (error) {
-  //     window.flash('Erro ao salvar usuário!', 'error')
-  //   }
-      
-
-  // }
 
   return (
     <form onSubmit={handleSignUp} className="row g-3 p-5">
@@ -111,9 +67,10 @@ const RegisterUser = () => {
         <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="form-control" id="inputAddress2" placeholder="Seu email" />
       </div>
       <div className="col-md-6">
-        <label htmlFor="inputCity" className="form-label">Senha:</label>
-        <input onChange={(e) => setPassword(e.target.value)} name='password' type="password" className="form-control" id="inputCity" />
+        <label htmlFor="inputPassword" className="form-label">Senha:</label>
+        <input onChange={(e) => setPassword(e.target.value)} name='password' type="password" className="form-control" id="inputPassword" />
       </div>
+
 
         <input name="endereco_id" defaultValue={addressId} type="text" hidden />
 

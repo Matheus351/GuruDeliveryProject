@@ -29,7 +29,7 @@ export type SignupProps = {
     name:string,
     email:string
     password:string,
-    endereco_id:string,
+    endereco_id:string
 }
 
 
@@ -99,6 +99,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
            })
 
            api.defaults.headers['Authorization'] = `Bearer ${token}`
+          
 
           // console.log(response.data)
         } catch (error) {
@@ -108,6 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 
     async function signUp({name, email, password, endereco_id}:SignupProps){
+
         try {
             const response = await api.post('/users',{
                 name,
@@ -115,6 +117,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password,
                 endereco_id
             })
+
 
         } catch (error) {
             console.log(error)
