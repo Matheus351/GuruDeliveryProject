@@ -36,7 +36,7 @@ const UserLogin = () => {
             password:password
         }
 
-        await signIn(userData)
+        await signIn(userData).catch(e=> console.log(e))
 
         setLoading(false)
 
@@ -136,13 +136,12 @@ const UserLogin = () => {
 
                 {/* <a href="#">Esqueceu sua senha?</a> */}
 
-                <button className="button" type="submit">
+                <button className="btn btn-primary w-100" type="submit">
                     Entrar
                 </button>
 
                 <div className="footer">
-                    <p>você não tem uma conta?<Link to="/register">Crie a sua aqui</Link></p>
-                    
+                    <p>você não tem uma conta?<Link to="/register">Crie a sua aqui</Link></p> 
                 </div>
             </form>
         </div>

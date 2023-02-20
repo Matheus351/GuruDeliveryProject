@@ -13,6 +13,9 @@ import { AddItemController } from "./controllers/carrinho/AddItemController";
 import { ListCarrinhoController } from "./controllers/carrinho/ListCarrinhoController";
 import { EmpresaController } from "./controllers/empresa/EmpresaController";
 import { ListEmpresaController } from "./controllers/empresa/ListEmpresaController";
+import { FindProductController } from "./controllers/produto/FindProductController";
+
+
 
 const router = Router()
 
@@ -28,6 +31,7 @@ router.post('/enderecos', new EnderecoController().handleEndereco)
 //produto routes
 router.post('/produtos', checkAuthentication, new ProductController().handleProduct)
 router.get('/produtos/all', new ListProductsController().handleProducts )
+router.get('/produtos/:id',new FindProductController().handleProduct)
 
 
 //categoria routes

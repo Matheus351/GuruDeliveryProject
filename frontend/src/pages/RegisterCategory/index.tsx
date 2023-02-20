@@ -1,8 +1,5 @@
 import { useState, SyntheticEvent, ChangeEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch'
-
-import { useContext } from 'react'
 import { setupAPIClient } from '../api/api'
 
 const RegisterCategory = () => {

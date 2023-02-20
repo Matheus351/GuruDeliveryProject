@@ -3,8 +3,6 @@ import { createContext, useContext} from "react";
 
 const AppContext = createContext({
     products:[],
-    amount:null,
-    handleAmount:(n:string) => null
 })
 
 

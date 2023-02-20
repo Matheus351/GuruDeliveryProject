@@ -1,11 +1,19 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import useFetch from '../../hooks/useFetch'
+import { setupAPIClient } from '../api/api'
+import './index.css'
+
+type Cidade = {
+    cidade:string;
+    rua:string;
+    bairro:string;
+    numero:string
+}
 
 const RegisterAddress = () => {
 
-    const [address, setAdress] = useState({})
+    const [address, setAdress] = useState<Cidade>()
 
     const navigate = useNavigate()
 
@@ -19,7 +27,7 @@ const RegisterAddress = () => {
         if (addressData) {
             localStorage.setItem('address', JSON.stringify(addressData))
             navigate('/register/user')
-            return
+            
         }
 
 
@@ -34,20 +42,30 @@ const RegisterAddress = () => {
 
 
     }
-
-    const handleSubmit = (e: SyntheticEvent) => {
+    
+   
+    const handleSubmit = async (e: SyntheticEvent) => {
 
         e.preventDefault()
-        //console.log(e) 
 
-        const formData = new FormData(e.target as HTMLFormElement)
+        const apiClient = setupAPIClient()
 
-        const data = Object.fromEntries(formData)
+        const data = {
+            cidade:address.cidade,
+            rua:address.rua,
+            numero:address.numero,
+            bairro:address.bairro
+
+        } 
 
         try {
 
-            httpConfig(data, 'POST')
-            window.flash('Endereço cadastrado com sucesso!', 'success')
+
+           const resp =  await apiClient.post('/enderecos',data)
+            localStorage.setItem('address', JSON.stringify(resp.data))
+            // httpConfig(data, 'POST')
+             window.flash('Endereço cadastrado com sucesso!', 'success')
+             navigate('/register/user')
 
         } catch (error) {
             window.flash('Erro ao cadastrar endereço!', 'error')
@@ -56,14 +74,9 @@ const RegisterAddress = () => {
 
     }
 
-
-
-
-
-
-
-
     return (
+
+
         <form onSubmit={handleSubmit} className="row g-3 p-5">
 
             <h4 className='text-muted'>Por favor, informe primeiro seu endereço antes de prosseguir com o cadastro</h4>

@@ -31,6 +31,9 @@ model Empresa {
 
   user     User      @relation(fields: [user_id], references: [id])
   user_id  String
+  produtos Produto[]
+  logo String
+  tipo String
 
   @@map("empresas")
 }
@@ -44,6 +47,8 @@ model Produto {
   categoria    Categoria      @relation(fields: [categoria_id], references: [id])
   categoria_id String
   items        ItemCarrinho[]
+  Empresa      Empresa?       @relation(fields: [empresa_cnpj], references: [cnpj])
+  empresa_cnpj  String?
 
   @@map("produtos")
 }
@@ -69,8 +74,9 @@ model Carrinho {
 }
 
 model ItemCarrinho {
-  id         String @id @default(uuid())
+  id         String  @id @default(uuid())
   quantidade Int
+  comment    String?
 
   carrinho    Carrinho @relation(fields: [carrinho_id], references: [id])
   produto     Produto  @relation(fields: [produto_id], references: [id])

@@ -9,14 +9,7 @@ function Pedidos() {
   const [pedidos, setPedidos] = useState(null)
   const apiClient = setupAPIClient()
 
-  // const [loading, setLoading] = useState(false)
-
   useEffect(() => {
-
-
-
-
-    // setLoading(true)
 
 
     const getPedidos = async () => {
@@ -27,7 +20,6 @@ function Pedidos() {
 
       setPedidos(resp.data)
 
-      //setLoading(false)
     }
 
     getPedidos()

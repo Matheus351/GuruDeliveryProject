@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { AuthContext } from '../../context/AuthContext'
 import { setupAPIClient } from '../api/api'
-import { FaSpinner } from 'react-icons/fa'
+
 import './index.css'
 
 type Item = {
@@ -56,7 +56,6 @@ const Carrinho = () => {
 
     }, [cartItems]);
 
-    // console.log('iteeeeem',cartItems)
 
 
     const handleAddToCart = (itenIndex) => {

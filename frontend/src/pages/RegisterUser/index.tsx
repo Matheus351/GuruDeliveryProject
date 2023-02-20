@@ -1,12 +1,9 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { SyntheticEvent, ChangeEvent } from 'react'
-import useFetch from '../../hooks/useFetch'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
-import UserContext from '../../context/AuthUserContext'
 import { AuthContext } from '../../context/AuthContext'
-import { SignupProps } from '../../context/AuthContext'
 const RegisterUser = () => {
 
 
@@ -17,10 +14,6 @@ const RegisterUser = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [endereco, setEndereco] = useState('')
-  // const [telefone, setTelefone] = useState('')
-
-  
   const [addressId, setAdressId] = useState('')
 
   const {signUp} = useContext(AuthContext)
@@ -48,6 +41,7 @@ const RegisterUser = () => {
 
 
      await signUp(data)
+     console.log(data)
 
      navigate('/login')
 
