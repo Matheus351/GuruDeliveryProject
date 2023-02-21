@@ -164,8 +164,10 @@ const Carrinho = () => {
                                                                 <FaMinus color='gray' />
                                                             </button>
 
-                                                            <input readOnly id="form1" name="quantity" value={item.amount} type="text"
-                                                                className="form-control form-control-sm" />
+                                                            <div id="form1" 
+                                                                className="form-control">
+                                                                    {item.amount}
+                                                                </div>
 
                                                             <button onClick={() => handleAddToCart(index)} className="btn btn-link px-2"
                                                             >

@@ -19,6 +19,7 @@ class FindProductService{
             id:true,
             name:true,
             price:true,
+            image:true,
             description:true,
             categoria_id:true,
             empresa_cnpj:true

@@ -2,7 +2,6 @@ import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import { setupAPIClient } from '../api/api'
-import './index.css'
 
 type Cidade = {
     cidade:string;

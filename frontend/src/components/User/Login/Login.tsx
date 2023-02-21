@@ -4,15 +4,12 @@ import StoreContext from "../../Store/Context";
 import logoImg from "../../../../public/logo.png"
 import { Link } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
-import UserContext from "../../../context/AuthUserContext";
 import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 import './Login.css';
 
 const UserLogin = () => {
-
-    const userContext = useContext(UserContext)
 
     const { signIn } = useContext(AuthContext)
     
@@ -54,20 +51,6 @@ const UserLogin = () => {
 
     const [user, setUser] = useState({})
     const { data: userLogged, httpConfig } = useFetch(baseURL)
-
-
-
-    useEffect(() => {
-
-        if (userLogged) {
-            localStorage.setItem('user', JSON.stringify(userLogged))
-            userContext.setUserToken(userLogged.token)
-        }
-
-
-    }, [userLogged])
-
-
 
     const handleUser = (e: ChangeEvent<HTMLInputElement>) => {
 

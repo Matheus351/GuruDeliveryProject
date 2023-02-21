@@ -51,9 +51,6 @@ function Header() {
                         {!isAuthenticated &&
                             <>
                                 {/* <Link className='btn btn-primary' to='/register'>Cadastrar</Link> */}
-                                <Link to={'/carrinho'}>
-                                    Seu carrinho:<BsCartDashFill className='m-2' size={25} color='orange' />
-                                </Link>
                                 <Link className='btn btn-primary' to='/login'>Fazer Login</Link>
                             </>
 
@@ -68,6 +65,10 @@ function Header() {
                                     <AiOutlineUser size={20} color='orange'/>
                                    
                                 </div>
+
+                                <Link to={'/carrinho'}>
+                                    Seu carrinho:<BsCartDashFill className='m-2' size={25} color='orange' />
+                                </Link>
 
 
                                 <button style={{ border: '1px solid grey', backgroundColor: '#fff' }} onClick={() => makeLogout()}>
